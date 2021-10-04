@@ -9,8 +9,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
@@ -43,7 +41,7 @@
               {% if messages %}
                 <ul>
                 {% for message in messages %}
-                  <li>{{ message }}</li>
+                  <p1 class = "text-center">{{ message }}</p1>
                 {% endfor %}
                 </ul>
               {% endif %}
@@ -51,9 +49,23 @@
         </p>
         {% if filename %}
             <div>
-                <img src="{{ url_for('display_image', filename=filename) }}">
+                <img class="center-block" src="{{ url_for('display_image', filename=filename) }}">
+            <hr />
             </div>
         {% endif %}
+
+        {% if filename%}
+        <div>
+            <a href= "/go/{{filename}}" class="btn btn-primary btn-block">Predict</a>
+        </div>
+        <hr />
+        {% endif %}
+
+        {% if predictsuccess %}
+        {% block content %}{% endblock %}
+        {% endif %}
+
+
         <form method="post" action="/upload_image" enctype="multipart/form-data">
             <dl>
                 <p>

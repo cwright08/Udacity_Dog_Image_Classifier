@@ -2,6 +2,8 @@ from resources import app
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 import os
+from resources import model_prediction
+
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -33,10 +35,16 @@ def upload_image():
 		flash('Allowed image types are -> png, jpg, jpeg, gif')
 		return redirect(request.url)
 
+# Display image uploaded 
 @app.route('/display/<filename>')
 def display_image(filename):
-    print(app.config['UPLOAD_FOLDER'])
-    print(url_for(app.config['UPLOAD_FOLDER'],+filename))
-    return redirect(url_for('static','/images/'+filename), code=301)
+    return redirect(url_for('static',filename='images/'+filename), code=301)
 
 #Source https://roytuts.com/upload-and-display-image-using-python-flask/
+
+# Run Dog Detector Algorithm
+@app.route('/go/<filename>')
+def dog_algo(filename):
+	from resources.model_prediction import dog_algo
+	message = dog_algo(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+	return render_template('go.html',predictsuccess = True, message=message, filename = filename) 
