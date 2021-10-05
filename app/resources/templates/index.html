@@ -3,10 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
 
     <title>Dog Detector</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
@@ -31,21 +30,23 @@
 
 #Content
 <div class="jumbotron">
-    <div class="container">
+    <div class="container" >
         <h1 class="text-center">Dog Classifier</h1>
-        <p class="text-center">Analysis image to detect a dog</p>
-        <hr />
-        <h3 class = "text-center">Select a file to upload</h3>
-        <p></p>
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <ul>
-                {% for message in messages %}
-                  <p1 class = "text-center">{{ message }}</p1>
-                {% endfor %}
-                </ul>
-              {% endif %}
-            {% endwith %}
+        <h2 class="text-center">Analysis your image to detect a dog</h2>
+    </div>
+</div>    
+
+<div class="container"> 
+    <div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+            <p1 class = "text-left">{{ message }}</p1>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
         </p>
         {% if filename %}
             <div>
@@ -54,34 +55,62 @@
             </div>
         {% endif %}
 
-        {% if filename%}
-        <div>
-            <a href= "/go/{{filename}}" class="btn btn-primary btn-block">Predict</a>
-        </div>
-        <hr />
-        {% endif %}
-
+       
         {% if predictsuccess %}
-        {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
+        {% else %}
+            {% if filename%}
+            <div>
+                <a href= "/go/{{filename}}" class="btn btn-primary btn-block">Predict</a>
+            </div>
+            <hr />
+            {% endif %}
+            
+        
+            {% if filename %}    
+            <h1> Choose another image?</h1>
+            <form method="post" action="/upload_image" enctype="multipart/form-data">
+                    <dl>
+                        <p>
+                            <input type="file" name="file" autocomplete="off" required>
+                        </p>
+                    </dl>
+                    <p>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </p>
+            </form>
+            {% else %}
+            <h3 class = "text-left">Please select a file to upload:</h3>
+            <form method="post" action="/upload_image" enctype="multipart/form-data">
+                <dl>
+                    <p>
+                        <input type="file" name="file" autocomplete="off" required>
+                    </p>
+                </dl>
+                <p>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </p>
+            </form>
+            {% endif %}
+
+
         {% endif %}
 
-
-        <form method="post" action="/upload_image" enctype="multipart/form-data">
-            <dl>
-                <p>
-                    <input type="file" name="file" autocomplete="off" required>
-                </p>
-            </dl>
-            <p>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </p>
-        </form>
-        
-    </div>
-
-
+    </div>        
 </div>
 
+<footer class="footer" >
+    <div class="container">
+        <div class="row">
+            <div class ="col-md-6 text-left">
+                <p>Dog Breed Classifier App</p>
+            </div>
+            <div class ="col-md-6 text-right">
+                <p>Last Updated: 05/10/2021</p>
+            </div>
+        </div>    
+    </div>
+</footer>
 
 </body>
 </html>
