@@ -12,7 +12,10 @@ ImageFile.LOAD_TRUNCATED_IMAGES = True
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 
 def dog_algo (img_path):
-    '''Function to allow image path to be passed and algorithm run and returned'''
+    '''Function to allow image path to be passed and algorithm run and returned 
+    INPUT: Image filepath
+    OUTPUT: Prediction    
+    '''
 
     def path_to_tensor(img_path):
         # loads RGB image as PIL.Image.Image type
@@ -61,8 +64,9 @@ def dog_algo (img_path):
     #Face Algo
     def face_detector(img_path):
         '''
-        INPUT:
-        OUTPUT:
+        Function to predict where a face is present in a provided image
+        INPUT: image filepath
+        OUTPUT: model prediction
         '''
         # extract pre-trained face detector
         face_cascade = cv2.CascadeClassifier(app.root_path+'/static/haarcascade_frontalface_alt.xml')
