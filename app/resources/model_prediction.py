@@ -93,10 +93,14 @@ def dog_algo (img_path):
             response = "This looks like a dog! I think it might be a"
             breed = breed_predictor(img_path)
             
-        if face_detector(img_path) == True: 
+        elif face_detector(img_path) == True: 
             response = "This looks like a human face! If it were a dog though, I think it is a "
             breed =  breed_predictor(img_path)
         
+        else:
+            response = "Oh, this doesnt look like a dog or a human!"
+            breed = "Why don't you try again"
+
         return f'{response} {breed}' 
 
     return dog_predictor(img_path)
