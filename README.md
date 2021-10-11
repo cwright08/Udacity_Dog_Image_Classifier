@@ -3,12 +3,12 @@
 Please note: An enhanced version of this read me is avaliable on Medium at the following address: 
 https://chrisw08.medium.com/my-first-cnn-dog-breed-classifier-6b89c3a6a505
 
-Project Description: 
+**Project Description:**
 The aim of this project was to create a web application that takes a user provided image, runs it through a pre-trained algorithm, and returns the dog breed (or the fact it is not a dog in the image!). I primarily chose to undertake this project as my Capstone project to conclude my Udacity Data Science nanodegree to further build my knowledge of neural networks, deep learning, and particularly CNNs which I had not encountered previously.  
 
 The core problem the project attempts to solve was training a CNN to predict and classify dog breeds, a task that is notoriously difficult, as various dog breeds can be extremely hard to tell apart, even to the trained human eye. This is described in detail in the notebook. The project successfully fulfilled this aim, achieveing accuracy of over 80% in testing data. In the real world however, the accuracy and recall is likely to be lower. 
 
-Web App - Instructions. 
+**Web App - Instructions**
 The web app is not currently hosted, therefore you must run it on your local machine. Instructions are as follows:
 1) Download all the source code under 'App' to your local PC. 
 2) Ensure all the libraries and technologies listed below are installed and sufficiently up to date in your workspace. 
@@ -16,10 +16,10 @@ The web app is not currently hosted, therefore you must run it on your local mac
 4) In your browser (Chrome/Edge), navigate to http://localhost:3001/
 5) Website is running. 
 
-Acknowledgements:
+**Acknowledgements**:
 The base notebook and structure of the project, along with data and a portion of the code was provided by Udacity (Udacity.com) as part of their Data Science Nanodegree. 
 
-Methodology:
+**Methodology**:
 Data Exploration
 As with all data science projects, the first step was to analyse the data that was avaliable for training. The data set contained 8,351 images of dogs in total. We also imported a dataset of 13,233 human images in order to detect a human face in the image. There are 133 dog breeds represented in the dataset.    
 
@@ -34,15 +34,15 @@ With the Resnet-50 model, it was first neccessary to pre-process the data to pro
 All that remained was to write the dog detection algorithm that returned True if a dog was detected in the supplied image. Again, the dog detector exhibited excellent performane, identifying 100% of the dog images and 0% of human images as dogs- this was very impressive for a pre-trained model. 
 
 Dog Breed Detection
-With the basic task of classifying an image as a dog or a human complete, it was time to tackle the harder problem of classifying dogs in to different breeds. In order to do this I first attempted to build a basic CNN from scratch using Keras. The model I chose contained 5 layers, 3 of which were convolutional and 2 were dense layers. I also tested and implemented a number of drop out layer configurations 
+With the basic task of classifying an image as a dog or a human complete, it was time to tackle the harder problem of classifying dogs in to different breeds. In order to do this I first attempted to build a basic CNN from scratch using Keras. The model I chose contained 5 layers, 3 of which were convolution and 2 were dense layers.
 
-Once compiled, I then trained the model. I attempted a number of configurations, with various number of training Epochs. The best configuration was achieved with two 0.25 drop off layers included, RMS prop optimizer, and 50 training epochs. This yielded an accuracy score of 10.7% - not bad for a first attempt, but not good enough for production.
+Once compiled, I then trained the model. I attempted a number of configurations, with various number of training Epochs. The best configuration was achieved with two 0.25 drop off layers included, RMS prop optimizer, and 50 training epochs. This yielded an accuracy score of 10.7% — not bad for a first attempt, but not good enough for production.
 
-To try and achieve greater levels of accuracy, I attempted to train a model using a transfer learning approach. Two different base alogirthms were tested, both VGG-19 and ResNet-50. ResNet 50 was found to show the better performance of the two models. 
+To try and achieve greater levels of accuracy, I then attempted to train a model using a transfer learning approach. Two different base algorithms were tested, both VGG-19 and ResNet-50. ResNet-50 was found to show the better performance of the two models with an accuracy of over 80%. The final architecture that emerged encompassed an average pooling layer and fully connected layer being added to the ResNet-50 model This was trained for 20 Epochs. 
 
-The final step in the process was to write a function to take a user supplied image and return a dog breed or human face result.  
+The final step in the process was to write a function to take a user supplied image and return a dog breed or human face result.
 
-Results
+**Results**
 In order to test the newly trained algorithm, it was tested against a number of dog and human images. The testing results can be seen in detail in the notebook. In summary, across the 6 tests, the two human tests were most successful. The 4 dog image tests showed more mixed results with one image being classified as a human, but with the correct dog breed (indicating that the dog detector algorithm needs further work), and another being classified incorrectly on both parts. Two dogs were correctly predicted.
 
 The outcome of the sampling was slightly disappointing overall. In testing, on the all be it small sample of 6 images, we saw that the algorithm is quite poor at detecting whether the image supplied is a dog or a human. When it comes to the breed predictor, performance is not particularly impressive either, all be it the breed that the model predicts does appear to closely resemble that of the image.
@@ -52,15 +52,15 @@ The use of image augmentation could be used to ensure that the model is training
 As always with data science, a larger training dataset could improve performance.
 Finally we could attempt to use different models, such as attempting to utilise transfer learning on other models.
 
-Web App 
+**Web App** 
 In order to serve the dog breed predictor to the end user, I built a web application using Flask backend. The app ensured the user could easily upload their own image and return a result from the algorithm through an intuitive user experience. It also allowed me to further develop my front end development skills which was a bonus. 
 
 To run the application, follow the instructions above. In future, this app could be deployed to the web for the most accessible and widely available user experience. 
 
-Conclusion
+**Conclusion**
 To conclude, the project successully produced a web application which was capable of predicting whether a user provided image is a human or a dog, and if a dog the relevant breed. This was achieved using a Transfer Learning based approach with the ResNet-50 model as the base. Through completeing the project I have successully developed and demonstrated skills in CNNs and image classifcation. 
 
-Libraries and Technology
+**Libraries and Technology**
 Python 3.8 Anaconda
 Pandas
 Numpy
